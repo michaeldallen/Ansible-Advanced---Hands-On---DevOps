@@ -1,0 +1,21 @@
+---
+# tasks file for flask_web
+
+- name: Install Python Flask dependencies
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - flask
+    - flask-mysql
+
+- name: Add simple web app source
+  copy:
+    src: src/simple_web_app/app.py
+    dest: /opt/simple_web_app/
+
+- name: run Flask
+  shell: 'ps -C flask w || (echo starting Flask ; env FLASK_APP=/opt/simple_web_app/app.py nohup flask run --host=0.0.0.0 & sleep 5 && ps -C flask w)'
+  register: flask_run_out
+  failed_when: "'/usr/local/bin/flask run' not in flask_run_out.stdout"
+  changed_when: "'starting Flask' in flask_run_out.stdout"
+

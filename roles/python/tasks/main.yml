@@ -1,0 +1,14 @@
+---
+# tasks file for python
+
+- name: Install host Python packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - python
+    - python-setuptools
+    - python-dev
+    - build-essential
+    - python-pip
+    - python-mysqldb
+

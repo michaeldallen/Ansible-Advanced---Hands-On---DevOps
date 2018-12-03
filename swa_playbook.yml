@@ -1,0 +1,22 @@
+- name: Deploy DB Server
+  hosts: db_server
+  tasks:
+    - name: Aliveness check
+      ping:
+
+  roles:
+    - python
+    - mysql_db
+
+
+- name: Deploy Web Server
+  hosts: web_server
+  tasks:
+    - name: Aliveness check
+      ping:
+
+  roles:
+    - python
+    - flask_web
+
+

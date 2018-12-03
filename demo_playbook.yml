@@ -1,0 +1,6 @@
+- name: Docker demo
+  hosts: mmumshad__ubuntu-ssh-enabled_*
+  tasks:
+    - name: Aliveness check
+      ping:
+
